@@ -1,0 +1,44 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto:500&display=swap');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+body{
+    line-height:1 !important;
+}
+
+.bg-white{
+    background-color: $blue !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #c7e6ff;
+    font-size: medium;
+}
+.navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+    color: rgb(255, 255, 255);
+}
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+    color: rgb(255, 255, 255);
+}
+.navbar-light .navbar-brand {
+    color: rgba(255, 255, 255) !important;
+}
+.btn-secondary {
+    color: #495057 !important;
+    background-color: #ffffff;
+    border-color: #b3b9bd !important;
+}
+.btn:hover {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.show > .btn-secondary.dropdown-toggle {
+    color: #fff !important;
+    border-color: #4e555b !important;
+}
