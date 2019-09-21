@@ -20,11 +20,12 @@ class RolesAndPermissionsSeeder extends Seeder
         /** @var \App\User $user */
         $user = factory(\App\User::class)->create();
         $user->assignRole('user');
+
         Role::create(['name' => 'admin']);
         /** @var \App\User $user */
         $admin = factory(\App\User::class)->create([
-            'name' => 'John Doe',
-            'email' => 'john@example.com',
+            'name' => 'Gilang Wahyudi',
+            'email' => 'ondozwahyudi@gmail.com',
         ]);
         $admin->assignRole('admin');
     }

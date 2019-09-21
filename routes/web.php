@@ -14,10 +14,13 @@
 Route::get('/', function () {
     return view('index');
 })->name('home');
-Route::get('/shop', function () {
-    return view('shop/shop');
+
+Route::get('/cart', function () {
+    return view('shop/cart');
 });
 
+
+Route::resource('shop', 'ProductController');
 Auth::routes();
-// Route::get('/admin/dashboard', 'HomeController@index')->name('home');
+
 
