@@ -10,7 +10,7 @@ class Product extends Model
 
     public function getPresetPriceAttribute()
     {
-        // ini untuk win 
+        // number 
         return '$' . number_format($this->price / 100, 2);
         // return money_format('$%i', $this->price/100);
     }

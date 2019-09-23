@@ -44,7 +44,7 @@
                                 <a class="dropdown-item" href="{{url('shop')}}">Shop</a>
                                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                                 <a class="dropdown-item" href="{{url('cart') }}">Cart</a>
-                                <a class="dropdown-item" href="checkout.html">Checkout</a>
+                                <a class="dropdown-item" href="">Checkout</a>
                             </div>
                             </li>
                             <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
@@ -82,7 +82,14 @@
                                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                                 <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                                <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+                                <li class="nav-item cta cta-colored">
+                                    <a href="{{route('cart.index')}}"class="nav-link"><span class="icon-shopping_cart">{{Cart::instance('default')->count()}}
+                                        </span>
+                                    </a>
+                                    {{-- @if (Cart::instance('default')->count() > 0)
+                                    @endif
+                                    <span>{{Cart::instance('default')->count()}}</span> --}}
+                                </li>
                                 <li class="nav-item active"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
                             @if (Route::has('register'))
                                 <li class="nav-item active"><a href="{{ route('register') }}" class="nav-link">Register</a></li>

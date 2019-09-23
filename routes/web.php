@@ -11,17 +11,27 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+use Gloudemans\Shoppingcart\Facades\Cart;
 
-Route::get('/cart', function () {
-    return view('shop/cart');
+Route::get('/', function () {
+        return view('index');
+    })->name('home');
+//tester no item select
+Route::get('/empty', function () {
+    Cart::destroy();
 });
 
 
-Route::resource('shop', 'ProductController');
-Route::get('/shop/{slug}', 'ProductController@show')->name('product.show');
+//cart
+Route::resource('cart', 'CartController');
+    Route::get('cart', 'CartController@index')->name('cart.index');
+    Route::post('/cart', 'CartController@store')->name('cart.store');
+    Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
+
+//production
+    Route::resource('shop', 'ProductController');
+    Route::get('/shop/{slug}', 'ProductController@show')->name('product.show');
+
 Auth::routes();
 
 
