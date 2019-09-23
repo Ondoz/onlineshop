@@ -43,12 +43,19 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * **
+     * Display the specified resource.
+     *
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        // $product->increment('view');
+        $product = Product::where('slug', $slug)->first();
+        return view('shop/product-single', compact('product'));
+        // dd($product);
+
     }
 
     /**

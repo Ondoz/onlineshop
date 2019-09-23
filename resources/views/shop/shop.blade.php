@@ -18,15 +18,15 @@
                         @foreach ($shop as $shops)
                             <div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
                                 <div class="product">
-                                    <a href="#" class="img-prod"><img class="img-fluid" src="{{asset('/assets')}}/images/product-1.jpg" alt="Colorlib Template">
+                                    <a href="{{$shops->url}}" class="img-prod"><img class="img-fluid" src="{{asset('/assets')}}/images/product-1.jpg" alt="Colorlib Template">
                                         <span class="status">30%</span>
                                         <div class="overlay"></div>
                                     </a>
                                     <div class="text py-3 px-3">
-                                        <h3><a href="#"> {{$shops->name}} </a></h3>
+                                        <h3><a href="{{$shops->url}}"> {{$shops->name}} </a></h3>
                                         <div class="d-flex">
                                             <div class="pricing">
-                                                <p class="price"><span> {{$shops->price}} </span></p>
+                                                <p class="price"><span> {{$shops->presetPrice()}} </span></p>
                                                 {{-- <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p> --}}
                                             </div>
                                             <div class="rating">

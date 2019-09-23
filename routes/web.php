@@ -21,6 +21,7 @@ Route::get('/cart', function () {
 
 
 Route::resource('shop', 'ProductController');
+Route::get('/shop/{slug}', 'ProductController@show')->name('product.show');
 Auth::routes();
 
 
