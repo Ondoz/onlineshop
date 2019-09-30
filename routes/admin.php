@@ -1,6 +1,6 @@
 <?php
 Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/admin/dashboard', function () {
+    Route::get('/admin/home', function () {
         return view('admin.home');
     })->name('admin.dashboard');
 

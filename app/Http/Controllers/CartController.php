@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -35,7 +37,21 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        Cart::add($request->id, $request->name, 1,$request->price)
+        // $duplicate = Cart::search(function ($cartItem, $rowId) use  ($request){
+        //     return $cartItem === $request->id;
+        // });
+
+        // if($duplicate->isNotEmpty()){
+        //     return redirect()->route('cart.index')->with('success', 'item is Already in your cart');
+        // }
+        $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
+            return $cartItem->id === $request->id;
+        });
+        if ($duplicates->isNotEmpty()) {
+            return redirect()->route('cart.index')->with('success', 'Item is already in your cart!');
+        }
+
+        Cart::add($request->id, $request->name, 1, $request->price)
             ->associate('App\Product');
 
         return redirect()->route('cart.index')->with('success', 'Item was added to your cart');

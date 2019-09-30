@@ -71,11 +71,11 @@
                     <h3>Cart Totals</h3>
                     <p class="d-flex">
                         <span>Subtotal</span>
-                        <span>$20.60</span>
+                        <span>{{PresentPrice(Cart::subtotal())}}</span>
                     </p>
                     <p class="d-flex">
-                        <span>Delivery</span>
-                        <span>$0.00</span>
+                        <span>Tax</span>
+                        <span>{{PresentPrice(Cart::tax())}}</span>
                     </p>
                     <p class="d-flex">
                         <span>Discount</span>
@@ -84,7 +84,7 @@
                     <hr>
                     <p class="d-flex total-price">
                         <span>Total</span>
-                        <span>$17.60</span>
+                        <span>{{PresentPrice(Cart::total())}}</span>
                     </p>
                 </div>
                 <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>

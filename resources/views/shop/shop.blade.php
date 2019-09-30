@@ -39,14 +39,17 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <form action="{{route('cart.store')}}" method="post" name="addcart">
+                                        <form action="{{route('cart.store')}}" method="post" id="addcart">
                                             <p class="bottom-area d-flex px-3">
                                                 {{csrf_field()}}
                                                 <input type="hidden" name="id" value="{{$shops->id}}">
                                                 <input type="hidden" name="name" value="{{$shops->name}}">
                                                 <input type="hidden" name="price" value="{{$shops->price}}">
-                                                <a href="#" onclick='document.forms["addcart"].submit(); return false;' class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-                                                <a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+                                                <button type="submit" class="btn btn-black text-center py-2 mr-1" style="border-radius: 0px; font-size: 13px;
+
+                                                    text-transform: uppercase;
+                                                    font-weight: 300;"><span>Add to cart<i class="ion-ios-add ml-1"></i></span></button>
+                                                {{-- <a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a> --}}
                                             </p>
                                         </form>
                                     </div>
@@ -318,4 +321,11 @@
     		</div>
     	</div>
     </section>
+@endsection
+@section('footer')
+<script>
+    document.getElementById("submit_cart").onclick = function() {
+        document.getElementById("addcart").submit();
+    }
+</script>
 @endsection
