@@ -19,4 +19,9 @@ class Product extends Model
     {
         return route("shop.show", $this->slug);
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
