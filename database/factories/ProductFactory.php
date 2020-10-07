@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(Product::class, function (Faker $faker) {
-    $name = $faker->word;
+    $name = $faker->unique()->word;
     $slug = ucfirst($name);
 
     return [
