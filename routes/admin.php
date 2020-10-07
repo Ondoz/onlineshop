@@ -4,7 +4,8 @@ Route::group(['middleware' => ['role:admin']], function () {
         return view('admin.home');
     })->name('admin.dashboard');
 
-    Route::get('/admin/data', function() {
-        return "data";
-    });
+    // Route::get('/admin/data', function() {
+    //     return "data";
+    // });
+    Route::resource('/admin/product', 'Admin\ProductController');
 });

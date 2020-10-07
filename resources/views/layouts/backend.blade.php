@@ -163,7 +163,13 @@
                     <li class="active">
                         <a href="#dashboard">
                             <i class="iconsmind-Shop-4"></i>
-                            <span>Dashboards</span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="data">
+                            <i class="iconsmind-Shop-4"></i>
+                            <span>Data</span>
                         </a>
                     </li>
                 </ul>
@@ -194,9 +200,29 @@
                         </a>
                     </li>
                 </ul>
+
+
+                <ul class="list-unstyled" data-link="data">
+                    <li class="active">
+                        <a href="Dashboard.Default.html">
+                            <i class="simple-icon-rocket"></i> Barang
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Dashboard.Analytics.html">
+                            <i class="simple-icon-pie-chart"></i>Penjualan
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Dashboard.Ecommerce.html">
+                            <i class="simple-icon-basket-loaded"></i> Pesanan
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+    
 @yield('content')
     <script src="{{asset('/')}}js/vendor/jquery-3.3.1.min.js"></script>
     <script src="{{asset('/')}}js/vendor/bootstrap.bundle.min.js"></script>
