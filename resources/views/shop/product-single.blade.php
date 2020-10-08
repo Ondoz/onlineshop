@@ -15,26 +15,45 @@
     	<div class="container">
     		<div class="row">
     			<div class="col-lg-6 mb-5 ftco-animate">
-    				<a href="{{asset('/assets')}}/images/menu-2.jpg" class="image-popup"><img src="{{asset('/assets')}}/images/product-1.jpg" class="img-fluid" alt="Colorlib Template"></a>
-    			</div>
+                    <div class="product">
+                        <a href="#" class="img-prod"><img class="img-fluid" src="{{asset('/img/kaos.jpg')}}" alt="Colorlib Template">
+                            @if ($product->discount != 0)
+                                <span class="status">{{$product->discount}}%</span>
+                            @endif
+                            <div class="overlay"></div>
+                        </a>
+                    </div>
+                </div>
     			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
                     <h3>{{$product->name}}</h3>
     				<div class="rating d-flex">
+                        <a href="#" class="mr-2">{{$rating}}</a>
                         <p class="text-left mr-4">
-                            <a href="#" class="mr-2">5.0</a>
+                        @for ($i = 0; $i < (int)$rating; $i++)
                             <a href="#"><span class="ion-ios-star-outline"></span></a>
-                            <a href="#"><span class="ion-ios-star-outline"></span></a>
-                            <a href="#"><span class="ion-ios-star-outline"></span></a>
-                            <a href="#"><span class="ion-ios-star-outline"></span></a>
-                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                        @endfor
                         </p>
                         <p class="text-left mr-4">
-                            <a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
+                            <a href="#" class="mr-2" style="color: #000;">{{$product->reviews->count()}} <span style="color: #bbb;">Rating</span></a>
                         </p>
                         <p class="text-left">
                             <a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
                         </p>
-					</div>
+                    </div>
+                    <div class="product">
+                        <div class="text py-3 px-3">
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    <p class="price">
+                                        @if ($product->discount != 0)
+                                            <span class="mr-2 price-dc">${{round($product->price,2)}}</span>
+                                        @endif
+                                        <span class="price-sale"> ${{ round((1 - ($product->discount / 100)) * $product->price)}} </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
     				<p>{{$product->descrption}}</p>
                     <div class="row mt-4">
                         <div class="col-md-6">

@@ -67,9 +67,21 @@ class ProductController extends Controller
      */
     public function show($slug)
     {
-        // $product->increment('view');
-        $product = Product::where('slug', $slug)->first();
-        return view('shop/product-single', compact('product'));
+        $product = Product::where('slug', $slug)->with('reviews')->first();
+        $rating = $product->reviews->count() > 0 ? round($product->reviews->sum('star') / $product->reviews->count(), 2) : 'No reting';
+        // $data = [];
+        // $map = $product->map(function ($value, $key) use ($data) {
+        //     $data['name'] = $value->name;
+        //     $data['price'] = round($value->price, 2);
+        //     $data['totalPrice'] = round((1 - ($value->discount / 100)) * $value->price);
+        //     $data['rating'] = $value->reviews->count() > 0 ? round($value->reviews->sum('star') / $value->reviews->count(), 2) : 'No reting';
+        //     $data['discount'] = $value->discount;
+        //     $data['review']
+        //     return $data;
+        // });
+        // return $product;
+
+        return view('shop/product-single', compact('product', 'rating'));
         // dd($product);
 
     }
