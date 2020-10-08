@@ -38,7 +38,6 @@
                                                 {{-- <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p> --}}
                                             </div>
 
-
                                             <div class="rating">
                                                 <p class="text-right">
                                                 @for ($i = 0; $i < (int)$shops['rating']; $i++)

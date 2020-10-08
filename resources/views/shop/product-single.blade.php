@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <section class="ftco-section">
+    <section class="ftco-section ">
     	<div class="container">
     		<div class="row">
     			<div class="col-lg-6 mb-5 ftco-animate">
@@ -53,8 +53,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-    				<p>{{$product->descrption}}</p>
+					</div>
+					<h2>Descrption</h2>
+					<p>{{$product->descrption}}</p>
+					<h2>Details</h2>
+					<p>{{$product->details}}</p>
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <p class="price"><span>{{$product->PresetPrice}}</span></p>
@@ -86,7 +89,7 @@
 	          	        </div>
 	          	        <div class="w-100"></div>
                         <div class="col-md-12">
-                            <p style="color: #000;">80 piece available</p>
+                            <p style="color: #000;">{{$product->stock}} piece available</p>
                         </div>
           	        </div>
 
@@ -100,16 +103,61 @@
     			</div>
     		</div>
     	</div>
-    </section>
+		<div class="container testimony-section">
+			<div class="row justify-content-center mb-5 pb-3">
+				<div class="col-md-7 heading-section ftco-animate">
+					<h2 class="mb-4">Our satisfied customer says</h2>
+					<p>
+						Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="carousel-testimony owl-carousel">
+						@foreach ($product->reviews->take(5) as $item)
+							@if ($item->star != 0)
+								<div class="item">
+									<div class="testimony-wrap p-4 pb-5">
+										<div class="user-img mb-5" style="background-image: url({{asset("/assets")}}/images/person_1.jpg)">
+											<span class="quote d-flex align-items-center justify-content-center">
+											<i class="icon-quote-left"></i>
+											</span>
+										</div>
+										<div class="text">
+											<p class="mb-5 pl-4 line">
+												{{ limit_word($item->review,10) }}
+											</p>
+											<p class="name">{{$item->customer}}</p>
+											@for ($i = 0; $i < (int)$item->star; $i++)
+												<a href="#"><span class="ion-ios-star-outline"></span></a>
+											@endfor
+										</div>
+									</div>
+								</div>
+							@endif
+						@endforeach
+					</div>
+				</div>
+			</div>
+			@if ($product->reviews->count() > 5)	
+			<div class="row justify-content-center mt-3 pb-3">
+				<div class="col-md-8s heading-section ftco-animate">
+					<p><a href='#' onclick='document.forms["addcart"].submit(); return false;' class="btn btn-black py-3 px-5 mb-4">Show All Response</a></p>
+				</div>
+			</div>
+			@endif
+		</div>
+	</section>
 
     <section class="ftco-section bg-light">
     	<div class="container">
-				<div class="row justify-content-center mb-3 pb-3">
-          <div class="col-md-12 heading-section text-center ftco-animate">
-            <h2 class="mb-4">Ralated Products</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-          </div>
-        </div>
+			<div class="row justify-content-center mb-3 pb-3">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+					<h2 class="mb-4">Ralated Products</h2>
+					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+				</div>
+			</div>
     	</div>
     	<div class="container">
     		<div class="row">
