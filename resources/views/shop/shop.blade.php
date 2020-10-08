@@ -15,36 +15,44 @@
     		<div class="row">
     			<div class="col-md-8 col-lg-10 order-md-last">
     				<div class="row">
-                        @foreach ($shop as $shops)
+                        @foreach ($map as $shops)
+                      
                             <div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
                                 <div class="product">
-                                    <a href="{{$shops->url}}" class="img-prod"><img class="img-fluid" src="{{asset('/assets')}}/images/product-1.jpg" alt="Colorlib Template">
-                                        <span class="status">30%</span>
+                                    <a href="{{route('shop.show', $shops['slug'])}}" class="img-prod"><img class="img-fluid" src="{{asset('/img/kaos.jpg')}}" alt="Colorlib Template">
+                                        @if ($shops['discount'] != 0)
+                                            <span class="status">{{$shops['discount']}}%</span>
+                                        @endif
                                         <div class="overlay"></div>
                                     </a>
                                     <div class="text py-3 px-3">
-                                        <h3><a href="{{$shops->url}}"> {{$shops->name}} </a></h3>
+                                        <h3><a href="{{route('shop.show', $shops['slug'])}}"> {{$shops['name']}} </a></h3>
                                         <div class="d-flex">
                                             <div class="pricing">
-                                                <p class="price"><span> {{ $shops->presetPrice}} </span></p>
+                                                <p class="price">
+                                                @if ($shops['discount'] != 0)
+                                                    <span class="mr-2 price-dc">$ {{$shops['price']}}</span>
+                                                @endif
+                                                <span class="price-sale"> ${{ $shops['totalPrice']}} </span>
+                                                </p>
                                                 {{-- <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p> --}}
                                             </div>
+
+
                                             <div class="rating">
                                                 <p class="text-right">
+                                                @for ($i = 0; $i < (int)$shops['rating']; $i++)
                                                     <a href="#"><span class="ion-ios-star-outline"></span></a>
-                                                    <a href="#"><span class="ion-ios-star-outline"></span></a>
-                                                    <a href="#"><span class="ion-ios-star-outline"></span></a>
-                                                    <a href="#"><span class="ion-ios-star-outline"></span></a>
-                                                    <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                                @endfor
                                                 </p>
                                             </div>
                                         </div>
                                         <form action="{{route('cart.store')}}" method="post" id="addcart">
                                             <p class="bottom-area d-flex px-3">
                                                 {{csrf_field()}}
-                                                <input type="hidden" name="id" value="{{$shops->id}}">
-                                                <input type="hidden" name="name" value="{{$shops->name}}">
-                                                <input type="hidden" name="price" value="{{$shops->price}}">
+                                                <input type="hidden" name="id" value="{{$shops['id']}}">
+                                                <input type="hidden" name="name" value="{{$shops['name']}}">
+                                                <input type="hidden" name="price" value="{{$shops['price']}}">
                                                 <button type="submit" class="btn btn-black text-center py-2 mr-1" style="border-radius: 0px; font-size: 13px;
 
                                                     text-transform: uppercase;
@@ -255,21 +263,7 @@
 		    				</div>
 		    			</div>
 		    		</div>
-		    		<div class="row mt-5">
-		          <div class="col text-center">
-		            <div class="block-27">
-		              <ul>
-		                <li><a href="#">&lt;</a></li>
-		                <li class="active"><span>1</span></li>
-		                <li><a href="#">2</a></li>
-		                <li><a href="#">3</a></li>
-		                <li><a href="#">4</a></li>
-		                <li><a href="#">5</a></li>
-		                <li><a href="#">&gt;</a></li>
-		              </ul>
-		            </div>
-		          </div>
-		        </div>
+                    {{ $shop->links('layouts.paginate') }}
 		    	</div>
 
 		    	<div class="col-md-4 col-lg-2 sidebar">

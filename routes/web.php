@@ -19,6 +19,5 @@ Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy')
 
 //production
 Route::resource('shop', 'ProductController');
-Route::get('/shop/{slug}', 'ProductController@show')->name('product.show');
 
 Auth::routes();

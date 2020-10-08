@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Http\Resources\Product\ProductCollection;
+use App\Http\Resources\Product\ProductResource;
 use Illuminate\Http\Request;
+
+use function PHPSTORM_META\map;
 
 class ProductController extends Controller
 {
@@ -14,9 +18,21 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $shop = Product::all();
+        $shop = Product::paginate(10);
+        $data = [];
+        $map = $shop->map(function ($value, $key) use ($data) {
+            $data['id'] = $value->id;
+            $data['name'] = $value->name;
+            $data['slug'] = $value->slug;
+            $data['price'] = round($value->price, 2);
+            $data['totalPrice'] = round((1 - ($value->discount / 100)) * $value->price);
+            $data['rating'] = $value->reviews->count() > 0 ? round($value->reviews->sum('star') / $value->reviews->count(), 2) : 'No reting';
+            $data['discount'] = $value->discount;
+            return $data;
+        });
         // return response()->json($shop);
-        return view('shop/shop', compact('shop'));
+
+        return view('shop/shop', compact('map', 'shop'));
     }
 
     /**
