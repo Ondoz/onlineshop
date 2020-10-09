@@ -26,10 +26,10 @@
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
-                                </tr>
+                                </valr>
                             </thead>
                             <tbody>
-                                @foreach (Cart::content() as $item)
+                                @foreach (Cart::content() as $key => $item)
                                 <tr class="text-center">
                                     <form action="{{route('cart.destroy', $item->rowId)}}" method="POST" name="remotecart">
                                         {{csrf_field()}}
@@ -43,15 +43,14 @@
                                         <h3>{{$item->model->name}}</h3>
                                         <p>{{$item->model->details}}</p>
                                     </td>
-
-                                    <td class="price">${{$item->price}}</td>
+                                    <td class="" name="price[]"><h5><span>$</span><span class="price price_{{$item->rowId}}">{{$item->price}}</span></h5> </td>
                                     <td class="quantity">
                                         <div class="input-group mb-3">
-                                        <input type="text" name="quantity" class="quantity form-control input-number subtotalInput qty" value="{{$item->qty}}" min="1" max="100">
+                                        <input type="number"  name="qty[]" data-id="{{$item->rowId}}" class="quantity form-control input-number subtotalInput qty qty_{{$item->rowId}}" value="{{$item->qty}}" min="1" >
                                     </div>
                                     </td>
 
-                                    <td class="total">${{$item->price * $item->qty}}</td>
+                                    <td class="fr"><h5><span>$</span><span class="total total_{{$item->rowId}}">{{$item->price * $item->qty}}</span></h5></td>
                                 </tr><!-- END TR-->
                                 @endforeach
                             </tbody>
@@ -70,63 +69,49 @@
                     <h3>Cart Totals</h3>
                     <p class="d-flex">
                         <span>Subtotal</span>
-                        <span>${{Cart::subtotal()}}</span>
-                    </p>
-
-                    <p class="d-flex">
-                        <span>Discount</span>
-                       <span class="fr totalBayar">0</span>
+                        $ <span class="totalCalc">{{Cart::subtotal()}}</span>
                     </p>
                     <hr>
-                    <p class="d-flex total-price">
-                        <span>Total</span>
-                        <span>${{Cart::total()}}</span>
+                    <p class="d-flex">
+                        <span>Discount</span>
+                        <span class="">0</span>
                     </p>
+                    <hr>
+                    <p class="d-flex total-price ">
+                        <span>Total</span>$<span class="totalBayar"> {{Cart::subtotal()}}</span>
+                    </p>
+                    <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
                 </div>
-                <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
             </div>
-        </div>
         </div>
 
     </section>
 @endsection
 @section('js')
     <script>
+
         function sumSubtotal()
         {
-            var $sumDebit = 0;
-            $('.subtotalInput').each(function() {
-                var $value = $(this).val();
-                $sumDebit += parseFloat($value);
-            });
-            $total = $.number($sumDebit);
+            var $sum =  0;
+            $('.total').each(function(){
+                var $value = $(this).html();
+                $sum += parseFloat($value);
+                $total = $sum;
+            })
             $('.totalCalc').html($total);
+            $('.totalBayar').html($total);
         }
-
-        function classChange($uuid, $harga, $qty)
-        {
-            $now = $('.qtyItems_'+$uuid).val();
-            $totalShow = parseInt($qty) * parseInt($harga);
-
-            $('.qtyItems_'+$uuid).val($qty);
-            $('.subtotal_'+$uuid).html('Rp'+$.number($totalShow));
-            $('.subtotalInput_'+$uuid).val($totalShow);
-        }
-
 
         $('#tableItems').on('input', '.qty', function(){
-            var $uuid = $(this).attr('data-id');
+            var $id = $(this).attr('data-id');
             var $val = $(this).val();
-            var $harga = $('.harga_'+$uuid).val();
+            var $harga = $('.price_' + $id).html();
+
             if ($val === '0' || $val === '') {
-                $(this).val('1');
-                $val = 1;
-                console.log('Noll');
+                $('.total_' + $id).html(0);
             } else {
-
+                $('.total_' + $id).html($harga * $val);
             }
-
-            classChange($uuid, $harga, parseInt($val));
             sumSubtotal();
         });
     </script>

@@ -69,7 +69,7 @@ class ProductController extends Controller
     {
         $product = Product::where('slug', $slug)->first();
         $rating = $product->reviews->count() > 0 ? round($product->reviews->sum('star') / $product->reviews->count(), 2) : 'No reting';
-        // dd($product);
+
         return view('shop/product-single', compact('product', 'rating'));
     }
 
