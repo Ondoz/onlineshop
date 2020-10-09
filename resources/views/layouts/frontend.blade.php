@@ -242,7 +242,6 @@
 
 		});
     </script>
-    @yield('footer')
-
+    @yield('js')
   </body>
 </html>

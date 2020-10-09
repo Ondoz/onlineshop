@@ -17,7 +17,7 @@
                 <div class="row">
                 <div class="col-md-12 ftco-animate">
                     <div class="cart-list">
-                        <table class="table">
+                        <table class="table" id="tableItems">
                             <thead class="thead-primary">
                                 <tr class="text-center">
                                 <th>&nbsp;</th>
@@ -40,19 +40,18 @@
                                     <td class="image-prod"><div class="img" style="background-image:url({{asset('/assets/images/product-1.jpg')}}"></div></td>
 
                                     <td class="product-name">
-                                        <h3>{{$item->name}}</h3>
+                                        <h3>{{$item->model->name}}</h3>
                                         <p>{{$item->model->details}}</p>
                                     </td>
 
-                                    <td class="price">{{$item->model->PresetPrice}}</td>
-
+                                    <td class="price">${{$item->price}}</td>
                                     <td class="quantity">
                                         <div class="input-group mb-3">
-                                        <input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+                                        <input type="text" name="quantity" class="quantity form-control input-number subtotalInput qty" value="{{$item->qty}}" min="1" max="100">
                                     </div>
                                     </td>
 
-                                    <td class="total">$4.90</td>
+                                    <td class="total">${{$item->price * $item->qty}}</td>
                                 </tr><!-- END TR-->
                                 @endforeach
                             </tbody>
@@ -71,20 +70,17 @@
                     <h3>Cart Totals</h3>
                     <p class="d-flex">
                         <span>Subtotal</span>
-                        <span>{{PresentPrice(Cart::subtotal())}}</span>
+                        <span>${{Cart::subtotal()}}</span>
                     </p>
-                    <p class="d-flex">
-                        <span>Tax</span>
-                        <span>{{PresentPrice(Cart::tax())}}</span>
-                    </p>
+
                     <p class="d-flex">
                         <span>Discount</span>
-                        <span>$3.00</span>
+                       <span class="fr totalBayar">0</span>
                     </p>
                     <hr>
                     <p class="d-flex total-price">
                         <span>Total</span>
-                        <span>{{PresentPrice(Cart::total())}}</span>
+                        <span>${{Cart::total()}}</span>
                     </p>
                 </div>
                 <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
@@ -93,4 +89,45 @@
         </div>
 
     </section>
+@endsection
+@section('js')
+    <script>
+        function sumSubtotal()
+        {
+            var $sumDebit = 0;
+            $('.subtotalInput').each(function() {
+                var $value = $(this).val();
+                $sumDebit += parseFloat($value);
+            });
+            $total = $.number($sumDebit);
+            $('.totalCalc').html($total);
+        }
+
+        function classChange($uuid, $harga, $qty)
+        {
+            $now = $('.qtyItems_'+$uuid).val();
+            $totalShow = parseInt($qty) * parseInt($harga);
+
+            $('.qtyItems_'+$uuid).val($qty);
+            $('.subtotal_'+$uuid).html('Rp'+$.number($totalShow));
+            $('.subtotalInput_'+$uuid).val($totalShow);
+        }
+
+
+        $('#tableItems').on('input', '.qty', function(){
+            var $uuid = $(this).attr('data-id');
+            var $val = $(this).val();
+            var $harga = $('.harga_'+$uuid).val();
+            if ($val === '0' || $val === '') {
+                $(this).val('1');
+                $val = 1;
+                console.log('Noll');
+            } else {
+
+            }
+
+            classChange($uuid, $harga, parseInt($val));
+            sumSubtotal();
+        });
+    </script>
 @endsection

@@ -74,7 +74,7 @@
 		                    </div>
 						</div>
 						<div class="w-100"></div>
-						<div class="input-group col-md-6 d-flex mb-3">
+                        <div class="input-group col-md-6 d-flex mb-3">
                             <span class="input-group-btn mr-2">
                                 <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
                                 <i class="ion-ios-remove"></i>
@@ -86,7 +86,7 @@
                                     <i class="ion-ios-add"></i>
                                 </button>
                             </span>
-	          	        </div>
+                        </div>
 	          	        <div class="w-100"></div>
                         <div class="col-md-12">
                             <p style="color: #000;">{{$product->stock}} piece available</p>
@@ -94,11 +94,16 @@
           	        </div>
 
                       <form action="{{route('cart.store')}}" method="post" name="addcart">
-                            {{csrf_field()}}
+                        {{csrf_field()}}
                         <input type="hidden" name="id" value="{{$product->id}}">
                         <input type="hidden" name="name" value="{{$product->name}}">
-                        <input type="hidden" name="price" value="{{$product->price}}">
-                        <p><a href='#' onclick='document.forms["addcart"].submit(); return false;' class="btn btn-black py-3 px-5">Add to Cart</a></p>
+                        <input type="hidden" name="qty" id="qty" value="">
+                        @if ($product->discount != 0)
+                        <input type="hidden" name="price" value="{{ round((1 - ($product->discount / 100)) * $product->price)}}">
+                        @else
+                        <input type="hidden" name="price" value="{{round($product->price,2)}}">
+                        @endif
+                        <p><a href='#' onclick='myFunction();document.forms["addcart"].submit(); return false;' class="btn btn-black py-3 px-5">Add to Cart</a></p>
                     </form>
     			</div>
     		</div>
@@ -140,7 +145,7 @@
 					</div>
 				</div>
 			</div>
-			@if ($product->reviews->count() > 5)	
+			@if ($product->reviews->count() > 5)
 			<div class="row justify-content-center mt-3 pb-3">
 				<div class="col-md-8s heading-section ftco-animate">
 					<p><a href='#' onclick='document.forms["addcart"].submit(); return false;' class="btn btn-black py-3 px-5 mb-4">Show All Response</a></p>
@@ -277,4 +282,13 @@
     		</div>
     	</div>
     </section>
+@endsection
+
+@section('js')
+    <script>
+        function myFunction(){
+            let q = document.getElementById("quantity");
+            document.getElementById("qty").value = q.value;
+        }
+    </script>
 @endsection
