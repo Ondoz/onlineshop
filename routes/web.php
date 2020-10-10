@@ -19,6 +19,7 @@ Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy')
 
 //checout
 Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
+Route::post('checkout/store', 'CheckoutController@store')->name('checkout.store');
 
 //production
 Route::resource('shop', 'ProductController');

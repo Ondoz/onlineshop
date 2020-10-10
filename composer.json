@@ -14,7 +14,8 @@
         "hardevine/shoppingcart": "^2.7",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
-        "spatie/laravel-permission": "^3.17"
+        "spatie/laravel-permission": "^3.17",
+        "veritrans/veritrans-php": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

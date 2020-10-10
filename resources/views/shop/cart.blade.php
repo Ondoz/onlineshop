@@ -80,7 +80,17 @@
                     <p class="d-flex total-price ">
                         <span>Total</span>$<span class="totalBayar"> {{Cart::subtotal()}}</span>
                     </p>
-                    <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                    <form action="{{route('checkout.store')}}" method="post" name="addOrder">
+                        {{csrf_field()}}
+                        @foreach (Cart::content() as $item)
+                            <input type="hidden" name="name[]" value="{{$item->model->name}}">
+                            <input type="hidden" name="qty[]" value="{{$item->qty}}">
+                            <input type="hidden" name="price[]" value="{{$item->model->price}}">
+                        @endforeach
+                        <input type="hidden" class="totalQty" name="total_qty" value="{{Cart::count()}}" >
+                        <input type="hidden" class="totalPrice" name="total_price" value="{{Cart::subtotal()}}" >
+                        <p class="text-center"><a href='#' onclick='document.forms["addOrder"].submit(); return false;' class="btn btn-black py-3 px-5">Proceed to Checkout</a></p>
+                    </form>
                 </div>
             </div>
         </div>
@@ -89,6 +99,18 @@
 @endsection
 @section('js')
     <script>
+
+        function sumQty()
+        {
+            var $sum = 0;
+            $('.qty').each(function(){
+                var $value = $(this).val();
+                $sum += parseFloat($value);
+                $total = $sum;
+            })
+            // console.log($total);
+            $('.totalQty').val($total);
+        }
 
         function sumSubtotal()
         {
@@ -100,6 +122,7 @@
             })
             $('.totalCalc').html($total);
             $('.totalBayar').html($total);
+            $('.totalPrice').val($total);
         }
 
         $('#tableItems').on('input', '.qty', function(){
@@ -113,6 +136,7 @@
                 $('.total_' + $id).html($harga * $val);
             }
             sumSubtotal();
+            sumQty();
         });
     </script>
 @endsection
