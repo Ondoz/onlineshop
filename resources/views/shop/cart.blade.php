@@ -24,6 +24,7 @@
                                 <th>&nbsp;</th>
                                 <th>Product</th>
                                 <th>Price</th>
+                                <th>Size</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
                                 </valr>
@@ -43,7 +44,17 @@
                                         <h3>{{$item->model->name}}</h3>
                                         <p>{{$item->model->details}}</p>
                                     </td>
-                                    <td class="" name="price[]"><h5><span>$</span><span class="price price_{{$item->rowId}}">{{$item->price}}</span></h5> </td>
+                                    <td class="" name="price[]">
+                                        <h5>
+                                            <span>$</span>
+                                            <span class="price price_{{$item->rowId}}">{{$item->price}}</span>
+                                        </h5> 
+                                    </td>
+                                    <td class="size">
+                                        <h5>
+                                            <span>{{ucfirst($item->options->size)}}</span>
+                                        </h5>
+                                    </td>
                                     <td class="quantity">
                                         <div class="input-group mb-3">
                                         <input type="number"  name="qty[]" data-id="{{$item->rowId}}" class="quantity form-control input-number subtotalInput qty qty_{{$item->rowId}}" value="{{$item->qty}}" min="1" >
@@ -85,6 +96,7 @@
                         @foreach (Cart::content() as $item)
                             <input type="hidden" name="name[]" value="{{$item->model->name}}">
                             <input type="hidden" name="qty[]" value="{{$item->qty}}">
+                            <input type="hidden" name="size[]" value="{{$item->options->size}}">
                             <input type="hidden" name="price[]" value="{{$item->model->price}}">
                         @endforeach
                         <input type="hidden" class="totalQty" name="total_qty" value="{{Cart::count()}}" >

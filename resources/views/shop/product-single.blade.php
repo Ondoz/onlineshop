@@ -64,11 +64,11 @@
                             <div class="form-group d-flex">
                                 <div class="select-wrap">
                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                    <select name="" id="" class="form-control">
-                                        <option value="">Small</option>
-                                        <option value="">Medium</option>
-                                        <option value="">Large</option>
-                                        <option value="">Extra Large</option>
+                                    <select name="size" id="sz" class="form-control">
+                                        <option value="small">Small</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="large">Large</option>
+                                        <option value="extra large">Extra Large</option>
                                     </select>
 	                            </div>
 		                    </div>
@@ -98,6 +98,7 @@
                         <input type="hidden" name="id" value="{{$product->id}}">
                         <input type="hidden" name="name" value="{{$product->name}}">
                         <input type="hidden" name="qty" id="qty" value="">
+                        <input type="hidden" name="size" id="size" value="">
                         @if ($product->discount != 0)
                         <input type="hidden" name="price" value="{{ round((1 - ($product->discount / 100)) * $product->price)}}">
                         @else
@@ -155,7 +156,7 @@
 		</div>
 	</section>
 
-    <section class="ftco-section bg-light">
+    {{-- <section class="ftco-section bg-light">
     	<div class="container">
 			<div class="row justify-content-center mb-3 pb-3">
 				<div class="col-md-12 heading-section text-center ftco-animate">
@@ -281,14 +282,16 @@
     			</div>
     		</div>
     	</div>
-    </section>
+    </section> --}}
 @endsection
 
 @section('js')
     <script>
         function myFunction(){
             let q = document.getElementById("quantity");
+  			let x = document.getElementById("sz").value;
             document.getElementById("qty").value = q.value;
+  			document.getElementById("size").value = x;
         }
     </script>
 @endsection

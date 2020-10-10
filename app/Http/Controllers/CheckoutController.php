@@ -24,6 +24,7 @@ class CheckoutController extends Controller
         foreach ($request->name as $key => $value) {
             $arr['name'][] = $value;
             $arr['qty'][] = $request->qty[$key];
+            $arr['size'][] = $request->size[$key];
             $arr['price'][] = $request->price[$key];
         }
 
