@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Category;
+
 class General
 {
     public static function selectMultiLevel($name, $array = [], $options = [])
@@ -72,5 +74,15 @@ class General
 
         $i--;
         return $menu_html;
+    }
+
+
+    public static function getCategory()
+    {
+        $getCategories = [];
+        $getCategories = Category::orderBy('name', 'asc')->get();
+        $category['category'] = null;
+
+        return [$getCategories, $category];
     }
 }

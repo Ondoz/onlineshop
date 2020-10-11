@@ -17,13 +17,16 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $getCategory = Category::orderBy('name', 'asc')->get();
-        $getCategories = $getCategory->toArray();
-        $category['category'] = null;
+        $getCategories = self::getCategory();
+        $categories = Category::paginate(5);
+        return view('admin.categories.index', compact('categories', 'getCategories'));
+    }
 
 
-        $categories = Category::paginate(10);
-        return view('admin.categories.index', compact('categories', 'category', 'getCategories'));
+    private static function getCategory()
+    {
+        $getCategories = Category::orderBy('name', 'asc')->get();
+        return $getCategories;
     }
 
     /**
@@ -47,16 +50,17 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-        Category::create([
-            'name'      => ucfirst($request->name),
-            'slug'      => Str::slug($request->name, '-'),
-            'parent_id' => (int)$request->parent
-        ]);
+        if (Category::where([['name', $request->name], ['parent_id', $request->parent]])->exists()) {
+            return back()->with('error', 'Category atau Parent Category sudah ada Sudah ada!');
+        } else {
+            Category::create([
+                'name'      => ucfirst($request->name),
+                'slug'      => Str::slug($request->name, '-'),
+                'parent_id' => (int)$request->parent
+            ]);
+        }
 
-        return json_encode(array(
-            "statusCode" => 200
-        ));
-        // return back();
+        return back()->with('success', 'Category telah berhasil ditambahkan!');
     }
 
     /**
@@ -101,6 +105,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Category::findOrFail($id);
+        $data->delete();
+
+        return back()->with('success', 'Berhasil Dihapus!!!');
     }
 }
