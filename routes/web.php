@@ -11,6 +11,15 @@ Route::get('/empty', function () {
 });
 
 
+Route::group(
+    ['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['role:admin']],
+    function () {
+        Route::get('dashboard', 'DashboardController@index');
+        Route::resource('categories', 'CategoryController');
+    }
+);
+
+
 //cart
 Route::resource('cart', 'CartController');
 Route::get('cart', 'CartController@index')->name('cart.index');
@@ -23,5 +32,4 @@ Route::post('checkout/store', 'CheckoutController@store')->name('checkout.store'
 
 //production
 Route::resource('shop', 'ProductController');
-
 Auth::routes();

@@ -222,8 +222,11 @@
             </div>
         </div>
     </div>
-    
-@yield('content')
+    <main>
+        <div class="container-fluid">
+            @yield('content')
+        </div>
+    </main>
     <script src="{{asset('/')}}js/vendor/jquery-3.3.1.min.js"></script>
     <script src="{{asset('/')}}js/vendor/bootstrap.bundle.min.js"></script>
     <script src="{{asset('/')}}js/vendor/Chart.bundle.min.js"></script>
@@ -242,6 +245,15 @@
     <script src="{{asset('/')}}js/vendor/mousetrap.min.js"></script>
     <script src="{{asset('/')}}js/dore.script.js"></script>
     <script src="{{asset('/')}}js/scripts.js"></script>
+    <script>
+        $("#datatables").DataTable({
+            searching: false,
+            bLengthChange: false,
+            info: false,
+            paging: false
+        });
+    </script>
+    @yield('js')
 </body>
 
 </html>
