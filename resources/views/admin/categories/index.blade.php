@@ -9,8 +9,10 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Create New Category</h5>
-                <form method="POST" url="{{route('categories.store')}}">
+                <form id="categories" method="POST" action="{{route('categories.store')}}">
                     @csrf
+
+                   {{-- @method("put") --}}
                     <div class="form-group">
                         <label for="name">Name Category</label>
                         <input type="text" class="form-control" id="name" name="name">
@@ -32,7 +34,6 @@
                         <tr>
                             <th>Name</th>
                             <th>Slug</th>
-                            <th>Parent</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -81,9 +82,13 @@
 <script>
     $(document).ready(function(){
         $('#datatables').on('click', '.edit', function(){
+
+            $id = $(this).attr('data-id');
+            $put = '<input id="put" name="_method" type="hidden" value="PUT">';
+            $('#categories').attr('action', 'categories/' + $id );
+            $('#categories').append($put);
             $('#save').html('Update');
             $('#new').prop('hidden', false);
-            $id = $(this).attr('data-id');
             $.ajax({
                 url : "{{route('json.category_edit')}}",
                 type: "POST",
@@ -94,14 +99,15 @@
                 dataType: "JSON",
                 success: function(e){
                     $('#name').val(e.name);
-                    $('.parent').val(e.parent_id).attr('selected','selected');
                     console.log(e);
                 }
             })
         })
         $('#new').on('click', function(){
+            $('#categories').attr('action', 'categories');
             $('#save').html('Submit');
             $('#new').prop('hidden', true);
+            $('#put').remove();
         })
     })
 </script>

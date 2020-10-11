@@ -17,17 +17,11 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $getCategories = self::getCategory();
         $categories = Category::paginate(5);
-        return view('admin.categories.index', compact('categories', 'getCategories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
 
-    private static function getCategory()
-    {
-        $getCategories = Category::orderBy('name', 'asc')->get();
-        return $getCategories;
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -50,13 +44,12 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-        if (Category::where([['name', $request->name], ['parent_id', $request->parent]])->exists()) {
+        if (Category::where([['name', $request->name]])->exists()) {
             return back()->with('error', 'Category atau Parent Category sudah ada Sudah ada!');
         } else {
             Category::create([
                 'name'      => ucfirst($request->name),
                 'slug'      => Str::slug($request->name, '-'),
-                'parent_id' => (int)$request->parent
             ]);
         }
 
@@ -94,7 +87,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $data = Category::where('id', $id)->first();
+        $data->update([
+            'name' => $request->name
+        ]);
+        return back()->with('success', 'Berhasil Diupdate');
     }
 
     /**

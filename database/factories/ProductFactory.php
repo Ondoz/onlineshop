@@ -11,12 +11,18 @@ $factory->define(Product::class, function (Faker $faker) {
     $slug = ucfirst($name);
 
     return [
+        'sku' => $faker->unique()->randomNumber($nbDigits = NULL, $strict = false),
         'name' => $name,
         'slug' => $slug,
         'details' => $faker->paragraph,
         'price' => $faker->numberBetween(100, 1000),
         'stock' => $faker->randomDigit(),
         'discount' => $faker->numberBetween(2, 30),
-        'descrption' => $faker->paragraph
+        'descrption' => $faker->paragraph,
+        'status' => $faker->randomElement([
+            'draft',
+            'active',
+            'inactive'
+        ])
     ];
 });
