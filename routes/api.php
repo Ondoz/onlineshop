@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('json')->as('json.')->group(function () {
+    Route::prefix('get')->group(function () {
+        Route::post('/categori', 'Admin\CategoryController@getJson')->name('category_edit');
+    });
+});

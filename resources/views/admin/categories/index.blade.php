@@ -15,11 +15,8 @@
                         <label for="name">Name Category</label>
                         <input type="text" class="form-control" id="name" name="name">
                     </div>
-                    <div class="form-group">
-                        <span>Parent Category</span>
-                        {!! General::selectMultiLevel('parent', $getCategories, ['class' => 'form-control', 'selected' => old('parent_id') ?? $category['parent_id'] ?? '', 'placeholder'=>'---Chose Category---' ]) !!}
-                    </div>
                     <button type="submit" class="btn btn-primary mb-0" id="save">Submit</button>
+                    <button type="reset" class="btn btn-primary mb-0" id="new" hidden>New</button>
                 </form>
             </div>
         </div>
@@ -48,10 +45,8 @@
                                 <td>
                                     <p class="text-muted">{{$item->slug}}</p>
                                 </td>
-                                <td>
-                                    <p class="text-muted">{{$item->parent ? $item->parent->name : ''}}</p>
-                                </td>
-                                <td style="width: 10%">
+
+                                <td style="">
                                     <p class="text-muted">
                                         {!! Form::open([
                                             'method'=>'DELETE',
@@ -66,7 +61,7 @@
                                             'onclick'=>'return confirm("Anda yakin ingin menghapus barang ini ?")'
                                             )) !!}
                                         {!! Form::close() !!}
-                                        <button type="button" class="btn btn-secondary btn-xs mb-1"><div class="glyph-icon simple-icon-pencil"></div></button>
+                                        <button type="button" class="btn btn-secondary btn-xs mb-1 edit" id="edit" data-id="{{$item->id}}"><div class="glyph-icon simple-icon-pencil"></div></button>
                                     </p>
                                 </td>
                             </tr>
@@ -84,36 +79,31 @@
 @endsection
 @section('js')
 <script>
-    // $(document).ready(function(){
-    //     $('#save').on('click', function(){
-    //         var $name = $('#name').val();
-    //         var $parent = $('.parent').val();
-    //         if ($name != "" && $parent != "") {
-    //             $.ajax({
-    //                 url : "{{route('categories.store')}}",
-    //                 type: "POST",
-    //                 data : {
-    //                     _token: '{{ csrf_token() }}',
-    //                     name : $name,
-    //                     parent_id : $parent
-    //                 },
-    //                 cache:false,
-    //                 success: function(dataResult){
-    //                     console.log(dataResult);
-    //                     var dataResult = JSON.parse(dataResult);
-    //                     if(dataResult.statusCode==200){
-    //                         window.location = "{{route('categories.index')}}";
-    //                     }
-    //                     else if(dataResult.statusCode==201){
-    //                         alert("Error occured !");
-    //                     }
-    //                 }
-    //             })
-    //         } else {
-    //             alert('Please fill all the field !');
-    //         }
-    //     })
-    // })
+    $(document).ready(function(){
+        $('#datatables').on('click', '.edit', function(){
+            $('#save').html('Update');
+            $('#new').prop('hidden', false);
+            $id = $(this).attr('data-id');
+            $.ajax({
+                url : "{{route('json.category_edit')}}",
+                type: "POST",
+                data: {
+                    token: '{{ csrf_token() }}',
+                    id: $id
+                },
+                dataType: "JSON",
+                success: function(e){
+                    $('#name').val(e.name);
+                    $('.parent').val(e.parent_id).attr('selected','selected');
+                    console.log(e);
+                }
+            })
+        })
+        $('#new').on('click', function(){
+            $('#save').html('Submit');
+            $('#new').prop('hidden', true);
+        })
+    })
 </script>
 
 @endsection

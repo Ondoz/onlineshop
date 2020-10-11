@@ -10,11 +10,11 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api')->except('getJson');
+    // }
+
     public function index()
     {
         $getCategories = self::getCategory();
@@ -109,5 +109,12 @@ class CategoryController extends Controller
         $data->delete();
 
         return back()->with('success', 'Berhasil Dihapus!!!');
+    }
+
+
+    public function getJson(Request $request)
+    {
+        $data = Category::where('id', $request->id)->first();
+        return response()->json($data);
     }
 }
