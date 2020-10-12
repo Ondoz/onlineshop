@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-use App\Http\Resources\Product\ProductCollection;
-use App\Http\Resources\Product\ProductResource;
 use Illuminate\Http\Request;
 
-use function PHPSTORM_META\map;
-
-class ProductController extends Controller
+class ShopController extends Controller
 {
     /**
      * Display a listing of the resource.

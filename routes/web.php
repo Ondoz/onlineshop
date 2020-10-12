@@ -11,6 +11,7 @@ Route::get('/empty', function () {
 });
 
 
+
 Route::group(
     ['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['role:admin']],
     function () {
@@ -32,5 +33,5 @@ Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
 Route::post('checkout/store', 'CheckoutController@store')->name('checkout.store');
 
 //production
-Route::resource('shop', 'ProductController');
+Route::resource('shop', 'ShopController');
 Auth::routes();

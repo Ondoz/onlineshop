@@ -8,7 +8,13 @@
         @include('layouts._messages')
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Create New Category</h5>
+                <h5 class="card-title">Create New Category 
+                    <div class="float-sm-right text-zero">
+                        <a href="{{ route('product.index') }}" class="btn btn-xs btn-primary">Kembali</a>
+                    </div>
+                </h5>
+                    
+                    
 
                    {{-- @method("put") --}}
                     <div class="form-group">
@@ -32,7 +38,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="SKU">SKU</label>
-                        <input type="text" class="form-control" id="SKU" name="SKU">
+                        <input type="text" class="form-control" id="SKU" name="sku">
                     </div>
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -55,8 +61,8 @@
                         <input type="number" class="form-control" id="discount" name="discount">
                     </div>
                     <div class="form-group">
-                        <label for="discription">Discription</label>
-                        <input type="text" class="form-control" id="discription" name="discription">
+                        <label for="description">Discription</label>
+                        <input type="text" class="form-control" id="description" name="description">
                     </div>
                     <div class="form-group">
                         <label for="status">Status</label>

@@ -16,8 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-
-        $product = Product::paginate(10);
+        $product = Product::orderBy('id', 'desc')->paginate(10);
         return view("admin.product.index", compact('product'));
     }
 
@@ -46,7 +45,7 @@ class ProductController extends Controller
             'price' => 'required',
             'qty' => 'required',
             'discount' => 'required',
-            'discription' => 'required',
+            'description' => 'required',
             'status' => 'required'
 
         ]);
@@ -58,11 +57,11 @@ class ProductController extends Controller
             'price' => $request->price,
             'qty' => $request->qty,
             'discount' => $request->discount,
-            'discription' => $request->discription,
+            'description' => $request->description,
             'status' => $request->status
         ]);
 
-        return view('admin.product.index')->with('success', 'Produck Berhasil Di Tambahkan');
+        return back()->with('success', 'Produck Berhasil Di Tambahkan');
     }
 
     /**
