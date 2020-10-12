@@ -204,13 +204,13 @@
 
                 <ul class="list-unstyled" data-link="data">
                     <li class="active">
-                        <a href="Dashboard.Default.html">
-                            <i class="simple-icon-rocket"></i> Barang
+                        <a href="{{route('product.index')}}">
+                            <i class="simple-icon-rocket"></i> Product
                         </a>
                     </li>
                     <li>
-                        <a href="Dashboard.Analytics.html">
-                            <i class="simple-icon-pie-chart"></i>Penjualan
+                        <a href="{{route('categories.index')}}">
+                            <i class="simple-icon-pie-chart"></i> Categories
                         </a>
                     </li>
                     <li>

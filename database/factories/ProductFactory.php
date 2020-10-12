@@ -16,7 +16,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'slug' => $slug,
         'details' => $faker->paragraph,
         'price' => $faker->numberBetween(100, 1000),
-        'stock' => $faker->randomDigit(),
+        'qty' => $faker->randomDigit(),
         'discount' => $faker->numberBetween(2, 30),
         'descrption' => $faker->paragraph,
         'status' => $faker->randomElement([

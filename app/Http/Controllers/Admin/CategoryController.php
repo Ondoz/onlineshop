@@ -45,7 +45,7 @@ class CategoryController extends Controller
             'name' => 'required',
         ]);
         if (Category::where([['name', $request->name]])->exists()) {
-            return back()->with('error', 'Category atau Parent Category sudah ada Sudah ada!');
+            return back()->with('error', 'Category Sudah ada!');
         } else {
             Category::create([
                 'name'      => ucfirst($request->name),
@@ -89,9 +89,15 @@ class CategoryController extends Controller
     {
 
         $data = Category::where('id', $id)->first();
-        $data->update([
-            'name' => $request->name
-        ]);
+        if (Category::where([['name', $request->name]])->exists()) {
+            return back()->with('error', 'Category Sudah Ada');
+        } else {
+            $data->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name, '-')
+            ]);
+        }
+
         return back()->with('success', 'Berhasil Diupdate');
     }
 
