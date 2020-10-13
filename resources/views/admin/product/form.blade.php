@@ -76,40 +76,41 @@
                         <div class="card-body">
                             <h5 class="card-title">Category
                                 <div class="float-sm-right text-zero">
-                                    <button type="button" id="" class="btn btn-xs btn-primary addCategories" data-id="0">Add Categori</button>
+                                    <button type="button" id="" class="btn btn-xs btn-outline-primary" data-toggle="modal" data-target="#myModal" >Add Categori</button>
                                 </div>
                             </h5>
                             <div class="mb-3" id="categories">
-                                <a href="#">
-                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Flour</span>
-                                </a>
-                                <a href="#">
-                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Chocolate</span>
-                                </a>
-                                <a href="#">
-                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Caster
-                                        Sugar</span>
-                                </a>
-                                <a href="#">
-                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Baking
-                                        Powder</span>
-                                </a>
-                                <a href="#">
-                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Milk</span>
-                                </a>
-                                <a href="#">
-                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Eggs</span>
-                                </a>
-                                <a href="#">
-                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Vegetable
-                                        Oil</span>
-                                </a>
 
                             </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3" id="save">Submit</button>
                 </form>
+            </div>
+        </div>
+    </div>
+  <!-- The Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"  >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalContentLabel">Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <select class="form-control select2-single select2-hidden-accessible"  id="selectCat" tabindex="-1" aria-hidden="true">
+                        <option label="&nbsp;">--Option Categories--</option>
+                       @foreach ($categories as $key => $item)
+                           <option value="{{$item->id}}">{{$item->name}}</option>
+                       @endforeach
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-xs btn-primary addCategories" data-id="0">Add Categories</button>
+                </div>
             </div>
         </div>
     </div>
@@ -120,13 +121,20 @@
 @section('js')
     <script>
         $('.addCategories').click(function () {
-            var $id = 0;
+            var $id = $(this).attr('data-id');
             $ids = parseInt($id) + 1;
-            var $data = `<a href="#">
-                            <span class="badge badge-pill badge-outline-theme-2 mb-1">Flour</span>
+            $idCat = $("#selectCat").val();
+            $value = $("#selectCat option:selected").text();
+            var $data = `<a href="#" class="a ok_`+ $value +`">
+                            <button type="button" class="badge badge-pill badge-outline-theme-2 mb-1">`+ $value +`</button>
+                            <input type="hidden" name="categories[]" value="`+ $idCat +`">
                         </a>`
-            $('#categories').append($data);
-            $('.addCategories').attr('data-id', $ids);
+            if ($('a').hasClass('ok_'+ $value)) {
+               alert("Category already available");
+            }else{
+                $('#categories').append($data);
+                $('.addCategories').attr('data-id', $ids);
+            }
         });
     </script>
 @endsection

@@ -17,7 +17,7 @@ Route::group(
     function () {
         Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
         Route::resource('product', 'ProductController');
-        Route::resource('categories', 'CategoryController');
+        Route::resource('categories', 'CategoriesController');
     }
 );
 

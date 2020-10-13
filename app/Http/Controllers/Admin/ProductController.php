@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
@@ -27,7 +28,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view("admin.product.form");
+        $categories = Categories::all();
+        return view("admin.product.form", compact('categories'));
     }
 
     /**
@@ -49,7 +51,7 @@ class ProductController extends Controller
             'status' => 'required'
 
         ]);
-        Product::create([
+        $product = Product::create([
             'sku' => $request->sku,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
@@ -60,6 +62,23 @@ class ProductController extends Controller
             'description' => $request->description,
             'status' => $request->status
         ]);
+        $arr = [];
+        // foreach ($request->categories as $key => $lokasi) {
+        //     $arr[$lokasi] = [
+        //         'stok_sekarang' => (int) $request->stok_sekarang[$key],
+        //         'harga_beli'    => (int) $request->harga_beli,
+        //         'harga_jual_toko'   => $request->harga_jual_toko,
+        //         'harga_jual_partai' => $request->harga_jual_partai,
+        //         'pajak_ppn' => $request->pajak_ppn
+        //     ];
+        // }
+        // $product->categories()->sync([1, 2, 3], false);
+        $arr = [];
+        foreach ($request->categories as $key => $item) {
+            $arr['categories'] = $item;
+        }
+
+        $product->categories()->sync($arr);
 
         return back()->with('success', 'Produck Berhasil Di Tambahkan');
     }

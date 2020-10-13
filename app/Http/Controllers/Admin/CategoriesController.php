@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
+use App\Categories;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class CategoriesController extends Controller
 {
     // public function __construct()
     // {
@@ -17,7 +17,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::paginate(5);
+        $categories = Categories::paginate(5);
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -44,16 +44,16 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-        if (Category::where([['name', $request->name]])->exists()) {
-            return back()->with('error', 'Category Sudah ada!');
+        if (Categories::where([['name', $request->name]])->exists()) {
+            return back()->with('error', 'Categories Sudah ada!');
         } else {
-            Category::create([
+            Categories::create([
                 'name'      => ucfirst($request->name),
                 'slug'      => Str::slug($request->name, '-'),
             ]);
         }
 
-        return back()->with('success', 'Category telah berhasil ditambahkan!');
+        return back()->with('success', 'Categories telah berhasil ditambahkan!');
     }
 
     /**
@@ -88,9 +88,9 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
 
-        $data = Category::where('id', $id)->first();
-        if (Category::where([['name', $request->name]])->exists()) {
-            return back()->with('error', 'Category Sudah Ada');
+        $data = Categories::where('id', $id)->first();
+        if (Categories::where([['name', $request->name]])->exists()) {
+            return back()->with('error', 'Categories Sudah Ada');
         } else {
             $data->update([
                 'name' => $request->name,
@@ -109,7 +109,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $data = Category::findOrFail($id);
+        $data = Categories::findOrFail($id);
         $data->delete();
 
         return back()->with('success', 'Berhasil Dihapus!!!');
@@ -118,7 +118,7 @@ class CategoryController extends Controller
 
     public function getJson(Request $request)
     {
-        $data = Category::where('id', $request->id)->first();
+        $data = Categories::where('id', $request->id)->first();
         return response()->json($data);
     }
 }
