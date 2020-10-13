@@ -14,8 +14,7 @@
                     </div>
                 </h5>
                     
-                    
-
+            
                    {{-- @method("put") --}}
                     <div class="form-group">
                         <label for="name">gambar</label>
@@ -72,7 +71,28 @@
                             <option value="inactive">inactive</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary mb-0" id="save">Submit</button>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Category
+                                <div class="float-sm-right text-zero">
+                                    <a href="{{ route('product.index') }}" class="btn btn-xs btn-primary">Add Categori</a>
+                                </div>
+                            </h5>
+                                <table class="responsive nowrap" id="datatables" >
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3" id="save">Submit</button>
                 </form>
             </div>
         </div>
