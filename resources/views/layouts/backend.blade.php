@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/datatables.responsive.bootstrap4.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/select2.min.css" />
+    <link rel="stylesheet" href="{{asset('/')}}css/vendor/select2-bootstrap.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/perfect-scrollbar.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/owl.carousel.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/bootstrap-stars.css" />
@@ -237,6 +238,7 @@
     <script src="{{asset('/')}}js/vendor/fullcalendar.min.js"></script>
     <script src="{{asset('/')}}js/vendor/datatables.min.js"></script>
     <script src="{{asset('/')}}js/vendor/perfect-scrollbar.min.js"></script>
+    <script src="{{asset('/')}}js/vendor/bootstrap-tagsinput.min.js"></script>
     <script src="{{asset('/')}}js/vendor/owl.carousel.min.js"></script>
     <script src="{{asset('/')}}js/vendor/progressbar.min.js"></script>
     <script src="{{asset('/')}}js/vendor/jquery.barrating.min.js"></script>
