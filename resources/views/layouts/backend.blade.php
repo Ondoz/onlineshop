@@ -227,7 +227,9 @@
             @yield('content')
         </div>
     </main>
-    <script src="{{asset('/')}}js/vendor/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    {{-- <script src="{{asset('/')}}js/vendor/jquery-3.3.1.min.js"></script> --}}
     <script src="{{asset('/')}}js/vendor/bootstrap.bundle.min.js"></script>
     <script src="{{asset('/')}}js/vendor/Chart.bundle.min.js"></script>
     <script src="{{asset('/')}}js/vendor/chartjs-plugin-datalabels.js"></script>

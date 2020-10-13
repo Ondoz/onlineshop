@@ -8,13 +8,13 @@
         @include('layouts._messages')
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Create New Category 
+                <h5 class="card-title">Create New Category
                     <div class="float-sm-right text-zero">
                         <a href="{{ route('product.index') }}" class="btn btn-xs btn-primary">Kembali</a>
                     </div>
                 </h5>
-                    
-            
+
+
                    {{-- @method("put") --}}
                     <div class="form-group">
                         <label for="name">gambar</label>
@@ -76,20 +76,36 @@
                         <div class="card-body">
                             <h5 class="card-title">Category
                                 <div class="float-sm-right text-zero">
-                                    <a href="{{ route('product.index') }}" class="btn btn-xs btn-primary">Add Categori</a>
+                                    <button type="button" id="" class="btn btn-xs btn-primary addCategories" data-id="0">Add Categori</button>
                                 </div>
                             </h5>
-                                <table class="responsive nowrap" id="datatables" >
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            
+                            <div class="mb-3" id="categories">
+                                <a href="#">
+                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Flour</span>
+                                </a>
+                                <a href="#">
+                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Chocolate</span>
+                                </a>
+                                <a href="#">
+                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Caster
+                                        Sugar</span>
+                                </a>
+                                <a href="#">
+                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Baking
+                                        Powder</span>
+                                </a>
+                                <a href="#">
+                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Milk</span>
+                                </a>
+                                <a href="#">
+                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Eggs</span>
+                                </a>
+                                <a href="#">
+                                    <span class="badge badge-pill badge-outline-theme-2 mb-1">Vegetable
+                                        Oil</span>
+                                </a>
+
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3" id="save">Submit</button>
@@ -100,6 +116,19 @@
 
 </div>
 
+@endsection
+@section('js')
+    <script>
+        $('.addCategories').click(function () {
+            var $id = 0;
+            $ids = parseInt($id) + 1;
+            var $data = `<a href="#">
+                            <span class="badge badge-pill badge-outline-theme-2 mb-1">Flour</span>
+                        </a>`
+            $('#categories').append($data);
+            $('.addCategories').attr('data-id', $ids);
+        });
+    </script>
 @endsection
 
 
