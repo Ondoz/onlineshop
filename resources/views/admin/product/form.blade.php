@@ -9,10 +9,8 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="mb-4">Dropzone</h5>
-                <form action="/file-upload" class="dropzone">
-                    <div class="fallback">
-                        <input name="file" type="file" multiple />
-                      </div>
+                <form action="{{route('upload.store')}} class="dropzone" method="post" enctype="multipart/form-data">
+                    @csrf
                 </form>
             </div>
         </div>

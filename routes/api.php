@@ -19,6 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('json')->as('json.')->group(function () {
     Route::prefix('get')->group(function () {
-        Route::post('/categori', 'Admin\CategoryController@getJson')->name('category_edit');
+        Route::post('/categori', 'Admin\CategoriesController@getJson')->name('category_edit');
     });
 });
