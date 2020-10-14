@@ -94,6 +94,7 @@
                             <div class="mb-3" id="categories">
 
                             </div>
+
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3" id="save">Submit</button>
