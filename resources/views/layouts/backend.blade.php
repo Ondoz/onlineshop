@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/datatables.responsive.bootstrap4.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/select2.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="{{asset('/')}}css/vendor/dropzone.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/owl.carousel.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/bootstrap-stars.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/nouislider.min.css" />
@@ -228,8 +228,11 @@
             @yield('content')
         </div>
     </main>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
     {{-- <script src="{{asset('/')}}js/vendor/jquery-3.3.1.min.js"></script> --}}
     <script src="{{asset('/')}}js/vendor/bootstrap.bundle.min.js"></script>
     <script src="{{asset('/')}}js/vendor/Chart.bundle.min.js"></script>
@@ -244,7 +247,7 @@
     <script src="{{asset('/')}}js/vendor/select2.full.js"></script>
     <script src="{{asset('/')}}js/vendor/nouislider.min.js"></script>
     <script src="{{asset('/')}}js/vendor/bootstrap-datepicker.js"></script>
-    <script src="{{asset('/')}}js/vendor/dropzone.min.js"></script>
+
     <script src="{{asset('/')}}js/vendor/Sortable.js"></script>
     <script src="{{asset('/')}}js/vendor/mousetrap.min.js"></script>
     <script src="{{asset('/')}}js/dore.script.js"></script>

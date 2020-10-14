@@ -18,6 +18,7 @@ Route::group(
         Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
         Route::resource('product', 'ProductController');
         Route::resource('categories', 'CategoriesController');
+        Route::resource('images/upload', 'ProductImageController');
     }
 );
 
