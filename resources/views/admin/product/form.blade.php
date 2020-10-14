@@ -6,6 +6,18 @@
 
     <div class="col-xl-4 col-lg-12 mb-12">
         @include('layouts._messages')
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">Dropzone</h5>
+                <form action="/file-upload" class="dropzone">
+                    <div class="fallback">
+                        <input name="file" type="file" multiple />
+                        <input name="file" type="file" multiple />
+                        <input name="file" type="file" multiple />
+                      </div>
+                </form>
+            </div>
+        </div>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Create New Category
@@ -13,19 +25,19 @@
                         <a href="{{ route('product.index') }}" class="btn btn-xs btn-primary">Kembali</a>
                     </div>
                 </h5>
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <label for="name">details</label>
+                </div>
 
 
-                   {{-- @method("put") --}}
-                    <div class="form-group">
-                        <label for="name">gambar</label>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">details</label>
-                    </div>
-
-                </form>
             </div>
+
+
         </div>
+
     </div>
 
 
@@ -125,11 +137,15 @@
             $ids = parseInt($id) + 1;
             $idCat = $("#selectCat").val();
             $value = $("#selectCat option:selected").text();
-            var $data = `<a href="#" class="a ok_`+ $value +`">
-                            <button type="button" class="badge badge-pill badge-outline-theme-2 mb-1">`+ $value +`</button>
+            var $data = `<div class=" a ok_`+ $value +` alert alert-warning alert-dismissible fade show rounded mb-0" style="display:inline-block !importent;" role="alert">
+                            <strong>`+ $value +`</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
                             <input type="hidden" name="categories[]" value="`+ $idCat +`">
-                        </a>`
-            if ($('a').hasClass('ok_'+ $value)) {
+                        </div>
+                        `
+            if ($('div').hasClass('ok_'+ $value)) {
                alert("Category already available");
             }else{
                 $('#categories').append($data);

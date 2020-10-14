@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/datatables.responsive.bootstrap4.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/select2.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="{{asset('/')}}css/vendor/dropzone.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/owl.carousel.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/bootstrap-stars.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/nouislider.min.css" />
@@ -243,6 +244,7 @@
     <script src="{{asset('/')}}js/vendor/select2.full.js"></script>
     <script src="{{asset('/')}}js/vendor/nouislider.min.js"></script>
     <script src="{{asset('/')}}js/vendor/bootstrap-datepicker.js"></script>
+    <script src="{{asset('/')}}js/vendor/dropzone.min.js"></script>
     <script src="{{asset('/')}}js/vendor/Sortable.js"></script>
     <script src="{{asset('/')}}js/vendor/mousetrap.min.js"></script>
     <script src="{{asset('/')}}js/dore.script.js"></script>

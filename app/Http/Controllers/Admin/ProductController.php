@@ -48,7 +48,8 @@ class ProductController extends Controller
             'qty' => 'required',
             'discount' => 'required',
             'description' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'categories' => 'required'
 
         ]);
         $product = Product::create([
@@ -62,23 +63,13 @@ class ProductController extends Controller
             'description' => $request->description,
             'status' => $request->status
         ]);
-        $arr = [];
-        // foreach ($request->categories as $key => $lokasi) {
-        //     $arr[$lokasi] = [
-        //         'stok_sekarang' => (int) $request->stok_sekarang[$key],
-        //         'harga_beli'    => (int) $request->harga_beli,
-        //         'harga_jual_toko'   => $request->harga_jual_toko,
-        //         'harga_jual_partai' => $request->harga_jual_partai,
-        //         'pajak_ppn' => $request->pajak_ppn
-        //     ];
-        // }
-        // $product->categories()->sync([1, 2, 3], false);
+
         $arr = [];
         foreach ($request->categories as $key => $item) {
-            $arr['categories'] = $item;
+            $arr[$item] = $item;
         }
 
-        $product->categories()->sync($arr);
+        $product->categories()->sync($arr, false);
 
         return back()->with('success', 'Produck Berhasil Di Tambahkan');
     }
