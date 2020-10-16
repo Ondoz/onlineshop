@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="{{asset('/')}}font/iconsmind/style.css" />
     <link rel="stylesheet" href="{{asset('/')}}font/simple-line-icons/css/simple-line-icons.css" />
-
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/fullcalendar.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/dataTables.bootstrap4.min.css" />
@@ -19,8 +18,9 @@
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/owl.carousel.min.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/bootstrap-stars.css" />
     <link rel="stylesheet" href="{{asset('/')}}css/vendor/nouislider.min.css" />
-    <link rel="stylesheet" href="{{asset('/')}}css/vendor/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="{{asset('/')}}css/vendor/bootstrap-stars.css" />
     <link rel="stylesheet" href="{{asset('css/main.css')}}" />
+    @yield('header')
 </head>
 
 <body id="app-container" class="menu-default show-spinner">
@@ -229,11 +229,8 @@
         </div>
     </main>
 
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
-    {{-- <script src="{{asset('/')}}js/vendor/jquery-3.3.1.min.js"></script> --}}
+    <script src="{{asset('/')}}js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     <script src="{{asset('/')}}js/vendor/bootstrap.bundle.min.js"></script>
     <script src="{{asset('/')}}js/vendor/Chart.bundle.min.js"></script>
     <script src="{{asset('/')}}js/vendor/chartjs-plugin-datalabels.js"></script>
@@ -247,7 +244,6 @@
     <script src="{{asset('/')}}js/vendor/select2.full.js"></script>
     <script src="{{asset('/')}}js/vendor/nouislider.min.js"></script>
     <script src="{{asset('/')}}js/vendor/bootstrap-datepicker.js"></script>
-
     <script src="{{asset('/')}}js/vendor/Sortable.js"></script>
     <script src="{{asset('/')}}js/vendor/mousetrap.min.js"></script>
     <script src="{{asset('/')}}js/dore.script.js"></script>
@@ -259,7 +255,8 @@
             info: false,
             paging: false
         });
-    </script>
+        </script>
+    @yield('footer')
     @yield('js')
 </body>
 

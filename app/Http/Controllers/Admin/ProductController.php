@@ -43,7 +43,6 @@ class ProductController extends Controller
         $request->validate([
             'sku' => 'required',
             'name' => 'required',
-            'details' => 'required',
             'price' => 'required',
             'qty' => 'required',
             'discount' => 'required',
@@ -56,7 +55,6 @@ class ProductController extends Controller
             'sku' => $request->sku,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'details' => $request->details,
             'price' => $request->price,
             'qty' => $request->qty,
             'discount' => $request->discount,
@@ -80,9 +78,16 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+
+        $product = Product::where('slug', $slug)->first();
+        if (!empty($product)) {
+            $comment = $product->reviews()->paginate(10);
+            return view('admin.product.show', compact('product', 'comment'));
+        } else {
+            echo "Opps!!";
+        }
     }
 
     /**
@@ -91,8 +96,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
+        $product = Product::where('slug', $slug)->first();
+        $categories = Categories::all();
+        return view('admin.product.form', compact('product', 'categories'));
     }
 
     /**
@@ -104,7 +112,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $arr = [];
+        foreach ($request->categories as $key => $item) {
+            $arr[$item] = $item;
+            if ($product->categories()->where('categories_id', $arr)->exists()) {
+                return back()->with("error", "data nilai sudah ada");
+            }
+        }
+        // response()->json();
     }
 
     /**
@@ -116,5 +132,25 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function proCatDel(Request $request)
+    {
+        $product = Product::find($request->product_id);
+        $response =  $product->categories()->detach($request->categories_id);
+        if ($response != null) {
+            $response = [
+                'status' => '200',
+                'messege' => 'Delete successfully'
+            ];
+        } else {
+            $response = [
+                'status' => '500',
+                'messege' => 'Fail Delete Kontol !!!'
+            ];
+        }
+
+        return response()->json($response);
     }
 }

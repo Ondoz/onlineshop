@@ -44,6 +44,23 @@ class ProductImageController extends Controller
         $imageUpload->path = $imageName;
         $imageUpload->save();
         return response()->json(['success' => $imageName]);
+
+        // $path = storage_path('tmp/uploads');
+
+        // if (!file_exists($path)) {
+        //     mkdir($path, 0777, true);
+        // }
+
+        // $file = $request->file('file');
+
+        // $name = uniqid() . '_' . trim($file->getClientOriginalName());
+
+        // $file->move($path, $name);
+
+        // return response()->json([
+        //     'path'          => $name,
+        //     'original_name' => $file->getClientOriginalName(),
+        // ]);
     }
 
     /**

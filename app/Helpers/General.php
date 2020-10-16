@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use App\Category;
+use Carbon\Carbon;
 
 class General
 {
@@ -77,12 +77,8 @@ class General
     }
 
 
-    public static function getCategory()
+    public static function timeCreate($time)
     {
-        $getCategories = [];
-        $getCategories = Category::orderBy('name', 'asc')->get();
-        $category['category'] = null;
-
-        return [$getCategories, $category];
+        return Carbon::parse($time)->diffForHumans();
     }
 }

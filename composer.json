@@ -15,6 +15,7 @@
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^6.2",
+        "nesbot/carbon": "^2.41",
         "spatie/laravel-permission": "^3.17",
         "veritrans/veritrans-php": "^1.2"
     },
