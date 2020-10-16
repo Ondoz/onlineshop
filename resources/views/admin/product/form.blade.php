@@ -21,11 +21,11 @@
                             {!! Form::close() !!}
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
-       
+
         @if (!empty($product))
         <form action="{{route('product.update', $product->id)}}" method="post">
             @method('PUT')
@@ -62,17 +62,17 @@
                     </div>
                 </div>
             </div>
-                    
+
             <div class="card mb-4">
                 <div class="card-body">
-                    <div class="card-title"> <h5>Category</h5> 
+                    <div class="card-title"> <h5>Category</h5>
                         <span class="badge badge-xs badge-dark mb-1">Wajib</span>
                         <div class="float-sm-right text-zero">
                             <button type="button" id="" class="btn btn-xs btn-outline-primary" data-toggle="modal" data-target="#myModal" >Add Categori</button>
                         </div>
                     </div>
                     <div class="mb-3" id="categories">
-                        @if (!empty($product))    
+                        @if (!empty($product))
                             @foreach ($product->categories as $item)
                             <div class=" a ok_{{$item->name}} alert alert-light alert-dismissible fade show rounded mb-0" style="display:inline-block;" role="alert">
                                 <strong>{{$item->name}}</strong>
@@ -83,7 +83,7 @@
                             </div>
                             @endforeach
                         @endif
-                            
+
 
                     </div>
                 </div>
@@ -91,19 +91,19 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Details Product</h5>
-                
+
                     <div class="form-group row">
                         <label for="price" class="col-sm-4 col-form-label"> <Strong>Price</Strong>  <br>
                             Harga barang yang akan di jual
                         </label>
                         <div class="col-sm-8">
-                            <input type="number" class="form-control" id="price" name="price" value="{{ old('price') }}">
+                            <input type="number" class="form-control" id="price" name="price" value="{!! (!empty($product) ? $product->price :  old('price') ); !!}">
                         </div>
                     </div>
-                    
+
                     <div class="form-group row">
                         <label for="Qty" class="col-sm-4 col-form-label"> <Strong>Qty</Strong>  <br>
-                            Jumlah atau Stok yang tersedia 
+                            Jumlah atau Stok yang tersedia
                         </label>
                         <div class="col-sm-8">
                             <input type="number" class="form-control" id="Qty" name="qty" value="{!! (!empty($product) ? $product->qty :  old('qty') ); !!}">
@@ -111,21 +111,21 @@
                     </div>
                     <div class="form-group row">
                         <label for="Discount" class="col-sm-4 col-form-label"> <Strong>Discount</Strong>  <br> <br>
-                            Discount bisa di kosongkan dan tidak karna ini di peruntukan jika anda ingin memberi discount 
+                            Discount bisa di kosongkan dan tidak karna ini di peruntukan jika anda ingin memberi discount
                         </label>
                         <div class="col-sm-8">
                             <input type="number" class="form-control" id="Discount" name="discount" value="{!! (!empty($product) ? $product->discount :  old('discount') ); !!}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="Status" class="col-sm-4 col-form-label"> <Strong>Status</Strong>  <br> 
+                        <label for="Status" class="col-sm-4 col-form-label"> <Strong>Status</Strong>  <br>
                             Jika status aktif, produkmu dapat dicari oleh calon pembeli.
                         </label>
                         <div class="col-sm-8">
                             <select class="form-control select2-single" name="status" value="{!! (!empty($product) ? $product->status :  old('status') ); !!}">
                                 <option label="&nbsp;">&nbsp;</option>
-                                <option value="active">Active</option>
-                                <option value="inactive">inactive</option>
+                                <option value="active" {!! (!empty($product) &&  $product->status  == "active" ? "selected" : "" ); !!}>Active</option>
+                                <option value="inactive" {!! (!empty($product) &&  $product->status == "inactive" ? "selected" : ""); !!}>inactive</option>
                             </select>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
             </div>
             <div class="float-sm-right text-zero">
             </div>
-        </form>       
+        </form>
     </div>
   <!-- The Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"  >
@@ -175,7 +175,7 @@
 @section('js')
     <script>
         var myDropzone = new Dropzone("div#myId", { url: "{{route('upload.store')}}"});
-      
+
         $('.addCategories').click(function () {
             var $id = $(this).attr('data-id');
             $ids = parseInt($id) + 1;
@@ -196,7 +196,6 @@
                 $('.addCategories').attr('data-id', $ids);
             }
         });
-        // url : 'admin/productCat/' + $id + '/' + $idc,
 
         $('.catDel').click(function() {
             var $id = $(this).attr('data-id');
@@ -216,7 +215,7 @@
             });
         })
 
-  
+
     </script>
 @endsection
 

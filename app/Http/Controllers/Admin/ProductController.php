@@ -69,7 +69,7 @@ class ProductController extends Controller
 
         $product->categories()->sync($arr, false);
 
-        return back()->with('success', 'Produck Berhasil Di Tambahkan');
+        return back()->with('success', 'Product Berhasil Di Tambahkan');
     }
 
     /**
@@ -113,14 +113,38 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
+
+        $request->validate([
+            'sku' => 'required',
+            'name' => 'required',
+            'price' => 'required',
+            'qty' => 'required',
+            'discount' => 'required',
+            'description' => 'required',
+            'status' => 'required',
+            'categories' => 'required'
+
+        ]);
+        $product->update([
+            'sku' => $request->sku,
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+            'price' => $request->price,
+            'qty' => $request->qty,
+            'discount' => $request->discount,
+            'description' => $request->description,
+            'status' => $request->status
+        ]);
         $arr = [];
         foreach ($request->categories as $key => $item) {
             $arr[$item] = $item;
-            if ($product->categories()->where('categories_id', $arr)->exists()) {
-                return back()->with("error", "data nilai sudah ada");
+            if ($product->categories()->where('categories_id', $item)->exists()) {
+                $response[$key] =  "exists";
+            } else {
+                $product->categories()->sync($arr, false);
             }
         }
-        // response()->json();
+        return back()->with('success', "Berhasil di Update");
     }
 
     /**

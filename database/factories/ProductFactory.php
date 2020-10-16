@@ -18,7 +18,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'discount' => $faker->numberBetween(2, 30),
         'description' => $faker->paragraph,
         'status' => $faker->randomElement([
-            'draft',
             'active',
             'inactive'
         ])
